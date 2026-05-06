@@ -1,24 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const artCards = document.querySelectorAll('.art-card');
+    const panels = document.querySelectorAll('.panel');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const container = document.querySelector('.content-container');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
+    container.addEventListener('scroll', () => {
+        let current = "";
+        panels.forEach(panel => {
+            const panelTop = panel.offsetTop;
+            const panelHeight = panel.clientHeight;
+            if (container.scrollTop >= (panelTop - panelHeight / 3)) {
+                current = panel.getAttribute('id');
+            }
+        });
 
-            // Toggle active button class
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Filter logic
-            artCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                if (filter === 'all' || category === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
         });
     });
 });
