@@ -3,51 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYLER_WILKINS // ZIGG_STRUCTURE</title>
+    <title>TYLER_WILKINS // MOBILE_OPTIMIZED</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-wrapper">
-        <!-- FIXED SIDE NAV -->
-        <nav class="sidebar">
-            <div class="logo">TW_V2.0</div>
-            <ul class="nav-links">
-                <li><a href="#about" class="active">./WHO</a></li>
-                <li><a href="#portfolio">./WORK</a></li>
-                <li><a href="#booking">./BOOK</a></li>
-                <li><a href="https://www.instagram.com/trad.tyler/" target="_blank">./IG</a></li>
-            </ul>
-            <div class="status-indicator">SYSTEM_ACTIVE</div>
-        </nav>
+    <nav class="sidebar">
+        <div class="logo">TW_V7</div>
+        <ul class="nav-links">
+            <li><a href="#about">./ABOUT</a></li>
+            <li><a href="#art">./ART_DATA</a></li>
+            <li><a href="#booking">./INQUIRY</a></li>
+            <li><a href="https://www.instagram.com/trad.tyler/" target="_blank">./INSTA</a></li>
+        </ul>
+    </nav>
 
-        <!-- SCROLLABLE CONTENT PANELS -->
-        <main class="content-container">
-            <section id="about" class="panel">
-                <h1 class="hero-text">Tyler Wilkins. <br>Artist & Creator.</h1>
-                <p class="bio">Based in [Location]. Specializing in [Style]. Driven by the aesthetics of Brutalism and the precision of the Terminal.</p>
-            </section>
+    <main class="stack-container">
+        <section id="about" class="panel">
+            <div class="panel-content">
+                <h1>./WHO_IS_TYLER</h1>
+                <p class="bio-text">Artist and developer focused on high-contrast brutalism. This interface acts as a central terminal for visual projects and booking protocols.</p>
+            </div>
+        </section>
 
-            <section id="portfolio" class="panel">
-                <div class="panel-header">
-                    <h2>SELECTED_WORKS</h2>
-                </div>
+        <section id="art" class="panel">
+            <div class="panel-content">
+                <h2>./VISUAL_DATA</h2>
                 <div class="art-grid">
-                    <!-- Art Item -->
-                    <div class="art-item">
-                        <img src="https://via.placeholder.com/600x800" alt="Art">
-                        <div class="item-overlay">PROJECT_01</div>
-                    </div>
+                    <div class="art-item scroll-reveal"><img src="https://via.placeholder.com/800/000/fff?text=FILE_01" alt="Art 1"></div>
+                    <div class="art-item scroll-reveal"><img src="https://via.placeholder.com/800/000/fff?text=FILE_02" alt="Art 2"></div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="booking" class="panel">
-                <div class="booking-box">
-                    <h2>SECURE_A_SLOT</h2>
-                    <a href="YOUR_URL" class="cta-link">INITIATE_CALENDAR_HANDSHAKE</a>
-                </div>
-            </section>
-        </main>
-    </div>
+        <section id="booking" class="panel">
+            <div class="panel-content">
+                <h2>./SECURE_ACCESS</h2>
+                <a href="#" class="terminal-btn scroll-reveal">[INITIATE_CONTACT.EXE]</a>
+            </div>
+        </section>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
