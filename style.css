@@ -1,7 +1,8 @@
 :root {
-    --bg-color: #000000;
-    --text-color: #ffffff;
-    --border-color: #ffffff;
+    --bg-color: #f4f4f4; /* Neutral light gray */
+    --text-color: #1a1a1a;
+    --border-color: #d1d1d1;
+    --sidebar-width: 280px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -9,46 +10,62 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Courier New', Courier, monospace;
-    text-transform: uppercase;
+    font-family: 'Inter', Helvetica, Arial, sans-serif; /* Modern clean font */
+    overflow: hidden; /* We scroll the container, not the body */
+}
+
+.app-wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: var(--sidebar-width);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.nav-links { list-style: none; }
+.nav-links li { margin: 20px 0; }
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.9rem;
     letter-spacing: 1px;
 }
 
-.container { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-.border-bottom { border-bottom: 1px solid var(--border-color); }
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+/* Content Container */
+.content-container {
+    flex-grow: 1;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory; /* Makes it feel like discrete panels */
 }
 
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    margin-left: 20px;
+.panel {
+    min-height: 100vh;
+    padding: 60px;
+    border-bottom: 1px solid var(--border-color);
+    scroll-snap-align: start;
 }
 
-.gallery {
+.hero-text {
+    font-size: 5rem;
+    line-height: 1;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.art-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1px;
-    background-color: var(--border-color);
-    border: 1px solid var(--border-color);
-    margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
 }
 
-.art-card { background-color: var(--bg-color); padding: 15px; }
-.art-card img { width: 100%; filter: grayscale(100%); transition: 0.3s; }
-.art-card img:hover { filter: grayscale(0%); }
-
-.booking-btn {
-    display: inline-block;
-    padding: 15px 30px;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    text-decoration: none;
-    margin-top: 20px;
-}
-
-.booking-btn:hover { background: white; color: black; }
+.art-item img { width: 100%; border: 1px solid var(--border-color); }
