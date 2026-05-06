@@ -3,54 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYLER_WILKINS // PROTOCOL</title>
+    <title>TYLER_WILKINS // ZIGG_STRUCTURE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="crt-overlay"></div>
+    <div class="app-wrapper">
+        <!-- FIXED SIDE NAV -->
+        <nav class="sidebar">
+            <div class="logo">TW_V2.0</div>
+            <ul class="nav-links">
+                <li><a href="#about" class="active">./WHO</a></li>
+                <li><a href="#portfolio">./WORK</a></li>
+                <li><a href="#booking">./BOOK</a></li>
+                <li><a href="https://www.instagram.com/trad.tyler/" target="_blank">./IG</a></li>
+            </ul>
+            <div class="status-indicator">SYSTEM_ACTIVE</div>
+        </nav>
 
-    <nav class="border-bottom">
-        <div class="nav-container">
-            <div class="logo">TYLER_WILKINS</div>
-            <div class="nav-links">
-                <a href="#about">./ABOUT</a>
-                <a href="#portfolio">./ART</a>
-                <a href="https://www.instagram.com/trad.tyler/" target="_blank">./INSTA</a>
-            </div>
-        </div>
-    </nav>
+        <!-- SCROLLABLE CONTENT PANELS -->
+        <main class="content-container">
+            <section id="about" class="panel">
+                <h1 class="hero-text">Tyler Wilkins. <br>Artist & Creator.</h1>
+                <p class="bio">Based in [Location]. Specializing in [Style]. Driven by the aesthetics of Brutalism and the precision of the Terminal.</p>
+            </section>
 
-    <main>
-        <section id="about" class="border-bottom container">
-            <h2>> INITIALIZING_BIO</h2>
-            <p>I am an artist focused on [Your Style]. My work explores the intersection of brutalist design and traditional themes.</p>
-        </section>
-
-        <section id="portfolio" class="border-bottom container">
-            <div class="section-header">
-                <h2>> ART_OVERVIEW</h2>
-                <div class="filter-tools">
-                    <button class="filter-btn active" data-filter="all">ALL</button>
-                    <button class="filter-btn" data-filter="tattoo">TATTOO</button>
-                    <button class="filter-btn" data-filter="paint">PAINT</button>
+            <section id="portfolio" class="panel">
+                <div class="panel-header">
+                    <h2>SELECTED_WORKS</h2>
                 </div>
-            </div>
-            <div class="gallery">
-                <!-- Example Card -->
-                <div class="art-card" data-category="tattoo">
-                    <img src="https://via.placeholder.com/400" alt="Art 1">
-                    <div class="art-meta">FILE: TAT_001.JPG</div>
+                <div class="art-grid">
+                    <!-- Art Item -->
+                    <div class="art-item">
+                        <img src="https://via.placeholder.com/600x800" alt="Art">
+                        <div class="item-overlay">PROJECT_01</div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="booking" class="container">
-            <h2>> SCHEDULE_LINK</h2>
-            <p>Current Status: READY_FOR_INPUT</p>
-            <a href="YOUR_CALENDAR_URL" class="booking-btn">RUN_BOOKING_PROMPT.EXE</a>
-        </section>
-    </main>
-
+            <section id="booking" class="panel">
+                <div class="booking-box">
+                    <h2>SECURE_A_SLOT</h2>
+                    <a href="YOUR_URL" class="cta-link">INITIATE_CALENDAR_HANDSHAKE</a>
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
