@@ -1,0 +1,15 @@
+{
+  "name": "tyler-artdepot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "diagnose:facebook": "node scripts/diagnose-facebook-env.mjs",
+    "sync:facebook": "node scripts/fetch-facebook-page-media.mjs",
+    "diagnose:instagram": "node scripts/diagnose-instagram-env.mjs",
+    "sync:instagram": "node scripts/fetch-instagram-media.mjs",
+    "serve": "npx --yes serve . --listen 3333"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

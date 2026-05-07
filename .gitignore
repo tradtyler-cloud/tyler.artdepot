@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets — never commit real tokens (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Common env/secret tooling (local-only)
+.envrc
+.direnv/
+
+# Backup / renamed env files (often created by hand before copying to .env)
+.env.backup
+.env.old
+.env.bak
+.env.copy
+.env.save
+.env.swp
+
+# Directories that often hold keys or one-off exports
+secret/
+secrets/
+
+# OAuth / service account style exports (un-ignore with `!file.json` if you add a safe example)
+*credentials*.json
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+
+# Generic sensitive suffix
+*.secret
+
+# Keys / crypto material
+*.pem
+*.p12
+*.pfx
+*_rsa
+*_dsa
+*_ecdsa
+*_ed25519
+id_rsa*
+*.keystore
+*.key
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local logs (may include URLs or debug output)
+*.log
+
+# Aborted sync temp files
+**/gallery.json.tmp
+*.tmp
+
+# Deploy tool dirs (local linked projects sometimes store tokens)
+.vercel/
+.netlify/
+
+# OS clutter
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / tooling (machine-specific)
+.idea/
+*.swp
+*~

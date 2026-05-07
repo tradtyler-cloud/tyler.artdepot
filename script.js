@@ -1,104 +1,83 @@
-:root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --border-color: #000000;
-    --sidebar-width: 240px;
-    --mobile-nav: 60px;
-    
-    /* Adjusted Fluid Typography: Smaller minimums for mobile */
-    --h1-size: clamp(1.8rem, 8vw, 5rem);
-    --h2-size: clamp(1.4rem, 6vw, 3rem);
-    --nav-size: clamp(0.75rem, 1vw, 1rem);
+// Smooth Scrolling for Internal Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+function setGalleryStatus(el, text, isError) {
+    el.hidden = false;
+    el.textContent = text;
+    el.classList.toggle('is-error', Boolean(isError));
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+async function initInstagramGallery() {
+    const grid = document.getElementById('ig-gallery');
+    const statusEl = document.getElementById('ig-gallery-status');
+    if (!grid || !statusEl) return;
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Courier New', Courier, monospace;
-    text-transform: uppercase;
-}
-
-/* Sidebar Navigation (Desktop) */
-.sidebar {
-    position: fixed;
-    left: 0; top: 0; height: 100vh;
-    width: var(--sidebar-width);
-    border-right: 1px solid var(--border-color);
-    padding: 40px;
-    background: var(--bg-color);
-    z-index: 1000;
-}
-
-.nav-links { list-style: none; margin-top: 60px; }
-.nav-links li { margin-bottom: 25px; }
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: var(--nav-size);
-    font-weight: 900;
-}
-
-/* Stack Container */
-.stack-container { margin-left: var(--sidebar-width); }
-
-.panel {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: calc(100vw - var(--sidebar-width));
-    background: var(--bg-color);
-    border-top: 1px solid var(--border-color);
-    padding: 8vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-h1 { font-size: var(--h1-size); line-height: 1.1; margin-bottom: 1.5rem; }
-h2 { font-size: var(--h2-size); margin-bottom: 1rem; }
-
-.bio-text {
-    line-height: 1.6;
-    max-width: 600px;
-    text-transform: none;
-}
-
-/* Art Grid */
-.art-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.art-item img { width: 100%; border: 1px solid var(--border-color); }
-
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%; height: var(--mobile-nav);
-        flex-direction: row; border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 0 20px; align-items: center; justify-content: space-between;
-    }
-    .nav-links { display: flex; margin-top: 0; gap: 15px; }
-    .stack-container { margin-left: 0; margin-top: var(--mobile-nav); }
-
-    .panel {
-        width: 100vw;
-        position: relative; /* Disables sticky for mobile */
-        height: auto;       /* Allows panel to be only as big as the content */
-        min-height: 40vh;   /* Sets a comfortable minimum without blowing up the screen */
-        padding: 40px 20px;
-        border-bottom: 1px solid var(--border-color); /* Separator lines for mobile */
+    let data;
+    try {
+        const res = await fetch('data/gallery.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+    } catch {
+        if (location.protocol === 'file:') {
+            setGalleryStatus(
+                statusEl,
+                'Gallery needs an HTTP URL: run npm run serve (double-clicking index.html cannot load data/gallery.json).',
+                true
+            );
+        } else {
+            setGalleryStatus(statusEl, 'Could not load gallery data.', true);
+        }
+        return;
     }
 
-    .art-grid { grid-template-columns: 1fr; }
-    
-    /* Make images slightly smaller on mobile to prevent "blowing up" */
-    .art-item { max-width: 90%; margin: 0 auto; } 
+    const items = Array.isArray(data.items) ? data.items : [];
+    if (items.length === 0) {
+        setGalleryStatus(
+            statusEl,
+            'No synced posts yet. Run npm run sync:instagram after adding token + user id to .env.',
+            false
+        );
+        return;
+    }
+
+    statusEl.hidden = true;
+    const frag = document.createDocumentFragment();
+
+    for (const item of items) {
+        const src = item.displayUrl || item.mediaUrl;
+        if (!src) continue;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'art-item';
+
+        const link = document.createElement('a');
+        link.href = item.permalink || src;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+
+        const img = document.createElement('img');
+        img.src = src;
+        const cap = typeof item.caption === 'string' ? item.caption : '';
+        img.alt = cap ? cap.slice(0, 120) : 'Instagram post';
+
+        link.appendChild(img);
+        wrap.appendChild(link);
+        frag.appendChild(wrap);
+    }
+
+    grid.appendChild(frag);
 }
 
-/* Animation Reveal */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
-}
-.scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+document.addEventListener('DOMContentLoaded', initInstagramGallery);
+
+console.log("System Status: Visual_Archive_Online");
